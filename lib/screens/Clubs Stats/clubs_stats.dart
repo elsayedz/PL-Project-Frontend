@@ -63,48 +63,51 @@ class _ClubsStatsState extends State<ClubsStats> {
               }),
           Visibility(
             visible: hasClubData,
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: clubData.length,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Text("Stadium Name: ${clubData[index]["stadiumName"]}",
-                          style: mainStyle),
-                      Text("Address Name: ${clubData[index]["addressName"]}",
-                          style: mainStyle),
-                      Text("Street: ${clubData[index]["street"]}",
-                          style: mainStyle),
-                      Text("City: ${clubData[index]["city"]}",
-                          style: mainStyle),
-                      Text("ZipCode: ${clubData[index]["zipCode"]}",
-                          style: mainStyle),
-                      Text("Capacity: ${clubData[index]["capacity"]}",
-                          style: mainStyle),
-                      Text(
-                          "Record League Attendance: ${clubData[index]["recordLeagueAttendance"]}",
-                          style: mainStyle),
-                      Text("Pitch Length: ${clubData[index]["pitchL"]}",
-                          style: mainStyle),
-                      Text("Pitch Width: ${clubData[index]["pitchW"]}",
-                          style: mainStyle),
-                      Text("Building Date: ${clubData[index]["buildingDate"]}",
-                          style: mainStyle),
-                      Text("Home Club: ${clubData[index]["homeClub"]}",
-                          style: mainStyle),
-                      Text("Club Name: ${clubData[index]["clubName"]}",
-                          style: mainStyle),
-                      Text("Website: ${clubData[index]["website"]}",
-                          style: mainStyle),
-                      Divider(
-                        thickness: 3,
-                        color: mainPurple,
-                        indent: MediaQuery.of(context).size.width / 4,
-                        endIndent: MediaQuery.of(context).size.width / 4,
-                      )
-                    ],
-                  );
-                }),
+            child: Expanded(
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: clubData.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Text("Stadium Name: ${clubData[index]["stadiumName"]}",
+                            style: mainStyle),
+                        Text("Address Name: ${clubData[index]["addressName"]}",
+                            style: mainStyle),
+                        Text("Street: ${clubData[index]["street"]}",
+                            style: mainStyle),
+                        Text("City: ${clubData[index]["city"]}",
+                            style: mainStyle),
+                        Text("ZipCode: ${clubData[index]["zipCode"]}",
+                            style: mainStyle),
+                        Text("Capacity: ${clubData[index]["capacity"]}",
+                            style: mainStyle),
+                        Text(
+                            "Record League Attendance: ${clubData[index]["recordLeagueAttendance"]}",
+                            style: mainStyle),
+                        Text("Pitch Length: ${clubData[index]["pitchL"]}",
+                            style: mainStyle),
+                        Text("Pitch Width: ${clubData[index]["pitchW"]}",
+                            style: mainStyle),
+                        Text(
+                            "Building Date: ${clubData[index]["buildingDate"]}",
+                            style: mainStyle),
+                        Text("Home Club: ${clubData[index]["homeClub"]}",
+                            style: mainStyle),
+                        Text("Club Name: ${clubData[index]["clubName"]}",
+                            style: mainStyle),
+                        Text("Website: ${clubData[index]["website"]}",
+                            style: mainStyle),
+                        Divider(
+                          thickness: 3,
+                          color: mainPurple,
+                          indent: MediaQuery.of(context).size.width / 4,
+                          endIndent: MediaQuery.of(context).size.width / 4,
+                        )
+                      ],
+                    );
+                  }),
+            ),
           )
         ],
       ),

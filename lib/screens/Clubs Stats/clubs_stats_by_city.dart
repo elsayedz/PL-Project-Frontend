@@ -21,50 +21,49 @@ class _ClubsStatsByCityState extends State<ClubsStatsByCity> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text("Please Enter City Name"),
-            TextField(
-              decoration: InputDecoration(
-                hintText:
-                    "Make sure spelling is correct and capitalize first letters of name. Try London or Manchester",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: correctInput ? Colors.blue : Colors.red),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: correctInput ? Colors.grey : Colors.red,
-                      width: 2.0),
-                ),
+      child: Column(
+        children: [
+          Text("Please Enter City Name"),
+          TextField(
+            decoration: InputDecoration(
+              hintText:
+                  "Make sure spelling is correct and capitalize first letters of name. Try London or Manchester",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
               ),
-              controller: userChosenCity,
+              focusedBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: correctInput ? Colors.blue : Colors.red),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: correctInput ? Colors.grey : Colors.red, width: 2.0),
+              ),
             ),
-            BigButton(
-                title: 'Search',
-                onPressed: () async {
-                  var res = await ReqHandler.GET(
-                      path: '/club/city?city=${userChosenCity.text}');
+            controller: userChosenCity,
+          ),
+          BigButton(
+              title: 'Search',
+              onPressed: () async {
+                var res = await ReqHandler.GET(
+                    path: '/club/city?city=${userChosenCity.text}');
 
-                  if (res.statusCode != 200) {
-                    setState(() {
-                      correctInput = false;
-                    });
-                  } else {
-                    setState(() {
-                      correctInput = true;
-                      clubData = jsonDecode(res.body);
-                      hasClubData = true;
-                    });
-                    print(res.body);
-                  }
-                }),
-            Visibility(
-              visible: hasClubData,
+                if (res.statusCode != 200) {
+                  setState(() {
+                    correctInput = false;
+                  });
+                } else {
+                  setState(() {
+                    correctInput = true;
+                    clubData = jsonDecode(res.body);
+                    hasClubData = true;
+                  });
+                  print(res.body);
+                }
+              }),
+          Visibility(
+            visible: hasClubData,
+            child: Expanded(
               child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: clubData.length,
@@ -111,9 +110,9 @@ class _ClubsStatsByCityState extends State<ClubsStatsByCity> {
                       ],
                     );
                   }),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
