@@ -4,7 +4,7 @@ class ReqHandler {
   static const String DEV_BASE_URL = "http://127.0.0.1:3000";
   static const String PROD_BASE_URL =
       "https://premier-league-project.herokuapp.com";
-  static const bool flag = true;
+  static const bool flag = false;
   static const Map<String, String> _headers = {
     'Content-Type': 'application/json',
     "Access-Control-Allow-Origin": "*"
