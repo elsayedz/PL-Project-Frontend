@@ -55,7 +55,7 @@ class _StartScreenState extends State<StartScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              "pl_logo.png",
+              "assets/pl_logo.png",
               width: MediaQuery.of(context).size.width / 4,
               height: MediaQuery.of(context).size.height / 4,
             ),

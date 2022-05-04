@@ -22,6 +22,7 @@ import 'Players Stats/players_clubHist_screen.dart';
 import 'Players Stats/players_nat_screen.dart';
 import 'Players Stats/players_pos_screen.dart';
 import 'Players Stats/players_stats_screen.dart';
+import 'package:flutter/foundation.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String screenName = "/home_screen";
@@ -148,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             DrawerHeader(
               child: Image.asset(
-                "pl_logo.png",
+                "assets/pl_logo.png",
               ),
             ),
             ListTile(
@@ -158,6 +159,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: mainStyle,
               ),
               onTap: () async {
+                final isWebMobile = kIsWeb &&
+                    (defaultTargetPlatform == TargetPlatform.iOS ||
+                        defaultTargetPlatform == TargetPlatform.android);
                 Navigator.pop(context);
                 await showDialog(
                     barrierDismissible: true,
@@ -169,130 +173,242 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Dialog(
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width / 2,
-                                height: MediaQuery.of(context).size.height / 4,
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 12.0),
-                                        child: Text(
-                                          'Search for a match review',
-                                          style: mainStyle,
-                                        ),
-                                      ),
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
+                                height: isWebMobile
+                                    ? MediaQuery.of(context).size.height * 0.7
+                                    : MediaQuery.of(context).size.height / 4,
+                                child: !isWebMobile
+                                    ? Center(
+                                        child: Column(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
+                                              MainAxisAlignment.spaceAround,
                                           children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text('Home Team'),
-                                                DropdownButton(
-                                                  value: homeTeam,
-                                                  items: Clubs.map<
-                                                          DropdownMenuItem<
-                                                              String>>(
-                                                      (String value) {
-                                                    return DropdownMenuItem<
-                                                        String>(
-                                                      value: value,
-                                                      child: Text(value),
-                                                    );
-                                                  }).toList(),
-                                                  onChanged: (String? val) {
-                                                    setState(() {
-                                                      homeTeam = val!;
-                                                    });
-                                                    print(
-                                                        "Chossen value ${val}");
-                                                  },
-                                                ),
-                                              ],
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 12.0),
+                                              child: Text(
+                                                'Search for a match review',
+                                                style: mainStyle,
+                                              ),
                                             ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text('Away Team'),
-                                                DropdownButton(
-                                                  value: awayTeam,
-                                                  items: Clubs.map<
-                                                          DropdownMenuItem<
-                                                              String>>(
-                                                      (String value) {
-                                                    return DropdownMenuItem<
-                                                        String>(
-                                                      value: value,
-                                                      child: Text(value),
-                                                    );
-                                                  }).toList(),
-                                                  onChanged: (String? val) {
-                                                    setState(() {
-                                                      awayTeam = val!;
-                                                    });
-                                                    print(
-                                                        "Chossen value ${val}");
-                                                  },
-                                                ),
-                                              ],
+                                            SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text('Home Team'),
+                                                      DropdownButton(
+                                                        value: homeTeam,
+                                                        items: Clubs.map<
+                                                            DropdownMenuItem<
+                                                                String>>((String
+                                                            value) {
+                                                          return DropdownMenuItem<
+                                                              String>(
+                                                            value: value,
+                                                            child: Text(value),
+                                                          );
+                                                        }).toList(),
+                                                        onChanged:
+                                                            (String? val) {
+                                                          setState(() {
+                                                            homeTeam = val!;
+                                                          });
+                                                          print(
+                                                              "Chossen value ${val}");
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text('Away Team'),
+                                                      DropdownButton(
+                                                        value: awayTeam,
+                                                        items: Clubs.map<
+                                                            DropdownMenuItem<
+                                                                String>>((String
+                                                            value) {
+                                                          return DropdownMenuItem<
+                                                              String>(
+                                                            value: value,
+                                                            child: Text(value),
+                                                          );
+                                                        }).toList(),
+                                                        onChanged:
+                                                            (String? val) {
+                                                          setState(() {
+                                                            awayTeam = val!;
+                                                          });
+                                                          print(
+                                                              "Chossen value ${val}");
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text('Season'),
+                                                      DropdownButton(
+                                                        value: season,
+                                                        items: seasons.map<
+                                                            DropdownMenuItem<
+                                                                String>>((String
+                                                            value) {
+                                                          return DropdownMenuItem<
+                                                              String>(
+                                                            value: value,
+                                                            child: Text(value),
+                                                          );
+                                                        }).toList(),
+                                                        onChanged:
+                                                            (String? val) {
+                                                          setState(() {
+                                                            season = val!;
+                                                          });
+                                                          print(
+                                                              "Chossen value ${val}");
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text('Season'),
-                                                DropdownButton(
-                                                  value: season,
-                                                  items: seasons.map<
-                                                          DropdownMenuItem<
-                                                              String>>(
-                                                      (String value) {
-                                                    return DropdownMenuItem<
-                                                        String>(
-                                                      value: value,
-                                                      child: Text(value),
-                                                    );
-                                                  }).toList(),
-                                                  onChanged: (String? val) {
-                                                    setState(() {
-                                                      season = val!;
-                                                    });
-                                                    print(
-                                                        "Chossen value ${val}");
-                                                  },
-                                                ),
-                                              ],
+                                            BigButton(
+                                                title: 'Search',
+                                                onPressed: () {
+                                                  setState(() {
+                                                    _getReviews =
+                                                        _searchMatchReview();
+                                                  });
+                                                  Navigator.pop(context);
+                                                  print('pressed');
+                                                })
+                                          ],
+                                        ),
+                                      )
+                                    : Center(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 12.0),
+                                              child: Text(
+                                                'Search for a match review',
+                                                style: mainStyle,
+                                              ),
                                             ),
+                                            SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Text('Home Team'),
+                                                  DropdownButton(
+                                                    value: homeTeam,
+                                                    items: Clubs.map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: value,
+                                                        child: Text(value),
+                                                      );
+                                                    }).toList(),
+                                                    onChanged: (String? val) {
+                                                      setState(() {
+                                                        homeTeam = val!;
+                                                      });
+                                                      print(
+                                                          "Chossen value ${val}");
+                                                    },
+                                                  ),
+                                                  Text('Away Team'),
+                                                  DropdownButton(
+                                                    value: awayTeam,
+                                                    items: Clubs.map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: value,
+                                                        child: Text(value),
+                                                      );
+                                                    }).toList(),
+                                                    onChanged: (String? val) {
+                                                      setState(() {
+                                                        awayTeam = val!;
+                                                      });
+                                                      print(
+                                                          "Chossen value ${val}");
+                                                    },
+                                                  ),
+                                                  Text('Season'),
+                                                  DropdownButton(
+                                                    value: season,
+                                                    items: seasons.map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                      return DropdownMenuItem<
+                                                          String>(
+                                                        value: value,
+                                                        child: Text(value),
+                                                      );
+                                                    }).toList(),
+                                                    onChanged: (String? val) {
+                                                      setState(() {
+                                                        season = val!;
+                                                      });
+                                                      print(
+                                                          "Chossen value ${val}");
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            BigButton(
+                                                title: 'Search',
+                                                onPressed: () {
+                                                  setState(() {
+                                                    _getReviews =
+                                                        _searchMatchReview();
+                                                  });
+                                                  Navigator.pop(context);
+                                                  print('pressed');
+                                                })
                                           ],
                                         ),
                                       ),
-                                      BigButton(
-                                          title: 'Search',
-                                          onPressed: () {
-                                            setState(() {
-                                              _getReviews =
-                                                  _searchMatchReview();
-                                            });
-                                            Navigator.pop(context);
-                                            print('pressed');
-                                          })
-                                    ],
-                                  ),
-                                ),
                               ),
                             ),
                           );
                         },
                       );
                     });
-                setState(() {});
+                setState(() {
+                  mainBodyWidget =
+                      matches_review_screen(getReviews: _getReviews);
+                });
               },
             ),
             ListTile(
@@ -309,11 +425,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (context) {
                       return StatefulBuilder(
                         builder: (context, setState) {
+                          final isWebMobile = kIsWeb &&
+                              (defaultTargetPlatform == TargetPlatform.iOS ||
+                                  defaultTargetPlatform ==
+                                      TargetPlatform.android);
                           return Center(
                             child: Dialog(
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width / 1.5,
-                                height: MediaQuery.of(context).size.height / 4,
+                                height: isWebMobile
+                                    ? MediaQuery.of(context).size.height * 0.7
+                                    : MediaQuery.of(context).size.height / 4,
                                 child: Center(
                                   child: SingleChildScrollView(
                                     child: Column(
@@ -489,8 +611,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   await ReqHandler.POST(body,
                                                       path: '/reviews');
                                               print(createRevRes.statusCode);
-                                              setState(() {});
-                                              // Navigator.pop(context);
+                                              setState(() {
+                                                _getReviews = _future();
+                                              });
+                                              Navigator.pop(context);
                                               print('pressed');
                                             })
                                       ],
@@ -503,7 +627,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                       );
                     });
-                setState(() {});
+                setState(() {
+                  mainBodyWidget =
+                      matches_review_screen(getReviews: _getReviews);
+                });
               },
             ),
             ListTile(
