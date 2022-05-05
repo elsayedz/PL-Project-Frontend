@@ -33,228 +33,230 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 32.0),
-              child: Text(
-                "REGISTER",
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(bottom: 32.0),
+                child: Text(
+                  "REGISTER",
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-            Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text("Email"),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: TextFormField(
-                      controller: userEmailController,
-                      validator: (val) => Validator.validateEmail(email: val),
-                      decoration: InputDecoration(
-                        hintText: "Email",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+              Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Email"),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: TextFormField(
+                        controller: userEmailController,
+                        validator: (val) => Validator.validateEmail(email: val),
+                        decoration: InputDecoration(
+                          hintText: "Email",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const Text("Username"),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: TextFormField(
-                      controller: userUsernameController,
-                      decoration: InputDecoration(
-                        hintText: "Username",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                    const Text("Username"),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: TextFormField(
+                        controller: userUsernameController,
+                        decoration: InputDecoration(
+                          hintText: "Username",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const Text("Password"),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: TextFormField(
-                      controller: userPasswordController,
-                      obscureText: true,
-                      validator: (val) =>
-                          Validator.validatePassword(password: val),
-                      decoration: InputDecoration(
-                        hintText: "Password",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                    const Text("Password"),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: TextFormField(
+                        controller: userPasswordController,
+                        obscureText: true,
+                        validator: (val) =>
+                            Validator.validatePassword(password: val),
+                        decoration: InputDecoration(
+                          hintText: "Password",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const Text("Confirm Password"),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: TextFormField(
-                      controller: userConfirmPasswordController,
-                      validator: (val) => Validator.validateConfirmPass(
-                          password: userPasswordController.text,
-                          confirmPassword: val),
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: "Confirm Password",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                    const Text("Confirm Password"),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: TextFormField(
+                        controller: userConfirmPasswordController,
+                        validator: (val) => Validator.validateConfirmPass(
+                            password: userPasswordController.text,
+                            confirmPassword: val),
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: "Confirm Password",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const Text("Age"),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: TextFormField(
-                                controller: userAgeController,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: <TextInputFormatter>[
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                decoration: InputDecoration(
-                                  hintText: "Age",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const Text("Gender"),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: TextFormField(
-                                controller: userGenderController,
-                                maxLength: 1,
-                                decoration: InputDecoration(
-                                  hintText: "M or F",
-                                  counterText: "",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const Text("Birthday"),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: TextFormField(
-                                controller: userBirthdateController,
-                                decoration: InputDecoration(
-                                  hintText: "YYYY-MM-DD",
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                    Row(
                       children: [
-                        const Text(
-                          "Support Club: ",
-                          style: TextStyle(fontSize: 20),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Text("Age"),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: TextFormField(
+                                  controller: userAgeController,
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly
+                                  ],
+                                  decoration: InputDecoration(
+                                    hintText: "Age",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        SizedBox(width: 10),
-                        DropdownButton(
-                          value: supportClub,
-                          items: Clubs.map<DropdownMenuItem<String>>(
-                              (String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? val) {
-                            setState(() {
-                              supportClub = val!;
-                            });
-                            print("Chossen value ${val}");
-                          },
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Text("Gender"),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: TextFormField(
+                                  controller: userGenderController,
+                                  maxLength: 1,
+                                  decoration: InputDecoration(
+                                    hintText: "M or F",
+                                    counterText: "",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              const Text("Birthday"),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: TextFormField(
+                                  controller: userBirthdateController,
+                                  decoration: InputDecoration(
+                                    hintText: "YYYY-MM-DD",
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  BigButton(
-                    paddingHorizontal: 0.0,
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        print("VALIDDDDD");
-                        showDialog(
-                            barrierDismissible: false,
-                            context: context,
-                            builder: (context) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          const Text(
+                            "Support Club: ",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(width: 10),
+                          DropdownButton(
+                            value: supportClub,
+                            items: Clubs.map<DropdownMenuItem<String>>(
+                                (String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
                               );
-                            });
+                            }).toList(),
+                            onChanged: (String? val) {
+                              setState(() {
+                                supportClub = val!;
+                              });
+                              print("Chossen value ${val}");
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    BigButton(
+                      paddingHorizontal: 0.0,
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          print("VALIDDDDD");
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (context) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              });
 
-                        var body = jsonEncode({
-                          "email": userEmailController.text,
-                          "password": userConfirmPasswordController.text,
-                          "username": userUsernameController.text,
-                          "age": userAgeController.text,
-                          "gender": userGenderController.text,
-                          "birthdate": userBirthdateController.text,
-                          "supportClub": supportClub
-                        });
+                          var body = jsonEncode({
+                            "email": userEmailController.text,
+                            "password": userConfirmPasswordController.text,
+                            "username": userUsernameController.text,
+                            "age": userAgeController.text,
+                            "gender": userGenderController.text,
+                            "birthdate": userBirthdateController.text,
+                            "supportClub": supportClub
+                          });
 
-                        var res = await ReqHandler.POST(body, path: '/users');
-                        print('Response status: ${res.statusCode}');
-                        print('Response body: ${res.body}');
-                        if (res.statusCode == 200) {
-                          Navigator.pop(context);
-                          Navigator.pushNamed(context, HomeScreen.screenName);
-                          final prefs = await SharedPreferences.getInstance();
-                          await prefs.setString(
-                              'email', userEmailController.text);
-                          await prefs.setString(
-                              'username', userUsernameController.text);
+                          var res = await ReqHandler.POST(body, path: '/users');
+                          print('Response status: ${res.statusCode}');
+                          print('Response body: ${res.body}');
+                          if (res.statusCode == 200) {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, HomeScreen.screenName);
+                            final prefs = await SharedPreferences.getInstance();
+                            await prefs.setString(
+                                'email', userEmailController.text);
+                            await prefs.setString(
+                                'username', userUsernameController.text);
+                          }
                         }
-                      }
-                    },
-                    title: 'Sign Up',
-                  )
-                ],
+                      },
+                      title: 'Sign Up',
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

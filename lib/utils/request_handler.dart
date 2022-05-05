@@ -4,13 +4,13 @@ class ReqHandler {
   static const String DEV_BASE_URL = "http://127.0.0.1:3000";
   static const String PROD_BASE_URL =
       "https://premier-league-project.herokuapp.com";
-  static const bool flag = false;
+  static const bool Dev = false;
   static const Map<String, String> _headers = {
     'Content-Type': 'application/json',
     "Access-Control-Allow-Origin": "*"
   };
 
-  static POST(var body, {String path = '', bool isDev = flag}) async {
+  static POST(var body, {String path = '', bool isDev = Dev}) async {
     print('--------------- POST Request-----------------\n');
 
     var temp = isDev ? DEV_BASE_URL + path : PROD_BASE_URL + path;
@@ -25,7 +25,7 @@ class ReqHandler {
     return res;
   }
 
-  static GET({String path = '', bool isDev = flag}) async {
+  static GET({String path = '', bool isDev = Dev}) async {
     print('--------------- GET Request-----------------\n');
 
     var temp = isDev ? DEV_BASE_URL + path : PROD_BASE_URL + path;

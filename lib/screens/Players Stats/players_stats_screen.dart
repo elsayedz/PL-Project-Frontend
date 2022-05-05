@@ -24,8 +24,7 @@ class _PlayersStatsState extends State<PlayersStats> {
           Text("Please enter player name"),
           TextField(
             decoration: InputDecoration(
-              hintText:
-                  "Make sure spelling is correct and capitalize first letters of name",
+              hintText: "Enter player name",
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
@@ -61,7 +60,8 @@ class _PlayersStatsState extends State<PlayersStats> {
               }),
           Visibility(
             visible: hasPlayerData,
-            child: ListView.builder(
+            child: Expanded(
+              child: ListView.separated(
                 shrinkWrap: true,
                 itemCount: playerData.length,
                 itemBuilder: (context, index) {
@@ -114,7 +114,17 @@ class _PlayersStatsState extends State<PlayersStats> {
                       )
                     ],
                   );
-                }),
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Divider(
+                    thickness: 3,
+                    color: mainPurple,
+                    indent: MediaQuery.of(context).size.width / 4,
+                    endIndent: MediaQuery.of(context).size.width / 4,
+                  );
+                },
+              ),
+            ),
           )
         ],
       ),

@@ -21,63 +21,70 @@ class _PlayersByPosState extends State<PlayersByPos> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text("Please enter a position"),
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Make sure spelling is correct",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: correctInput ? Colors.blue : Colors.red),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: correctInput ? Colors.grey : Colors.red,
-                      width: 2.0),
-                ),
+      child: Column(
+        children: [
+          Text("Please enter a position"),
+          TextField(
+            decoration: InputDecoration(
+              hintText: "Make sure spelling is correct",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
               ),
-              controller: userPlayerPos,
+              focusedBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: correctInput ? Colors.blue : Colors.red),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: correctInput ? Colors.grey : Colors.red, width: 2.0),
+              ),
             ),
-            BigButton(
-                title: 'Search',
-                onPressed: () async {
-                  var res = await ReqHandler.GET(
-                      path: '/player?pos=${userPlayerPos.text}');
+            controller: userPlayerPos,
+          ),
+          BigButton(
+              title: 'Search',
+              onPressed: () async {
+                var res = await ReqHandler.GET(
+                    path: '/player?pos=${userPlayerPos.text}');
 
-                  if (res.statusCode != 200) {
-                    setState(() {
-                      correctInput = false;
-                    });
-                  } else {
-                    setState(() {
-                      correctInput = true;
-                      playerData = jsonDecode(res.body);
-                      hasPlayerData = true;
-                    });
-                    print(res.body);
-                  }
-                }),
-            Visibility(
-              visible: hasPlayerData,
-              child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: playerData.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                          '${index.toString()}-) ${playerData[index]['name']}'),
-                    );
-                  }),
-            )
-          ],
-        ),
+                if (res.statusCode != 200) {
+                  setState(() {
+                    correctInput = false;
+                  });
+                } else {
+                  setState(() {
+                    correctInput = true;
+                    playerData = jsonDecode(res.body);
+                    hasPlayerData = true;
+                  });
+                  print(res.body);
+                }
+              }),
+          Visibility(
+            visible: hasPlayerData,
+            child: Expanded(
+              child: Column(
+                children: [
+                  Text(
+                    "Total Number of players: ${playerData.length}",
+                    style: mainStyle,
+                  ),
+                  Flexible(
+                    child: ListView.builder(
+                        itemCount: playerData.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                                '${index.toString()}-) ${playerData[index]['name']}'),
+                          );
+                        }),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
